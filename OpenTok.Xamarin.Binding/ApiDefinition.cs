@@ -34,19 +34,17 @@ namespace OpenTok
         [Export ("publisher:didFailWithError:"), EventArgs ("OTPublisherDelegateError")]
         void DidFail (OTPublisher publisher, OTError error);
 
-        [Export ("publisherDidStartStreaming:"), EventArgs ("OTPublisherDelegatePublisher")]
-        void DidStartStreaming (OTPublisher publisher);
+        [Export ("publisher:streamCreated:"), EventArgs ("OTPublisherDelegatePublisher")]
+        void StreamCreated (OTPublisher publisher, OTStream stream);
 
-        [Export ("publisherDidStopStreaming:"), EventArgs ("OTPublisherDelegatePublisher")]
-        void DidStopStreaming (OTPublisher publisher);
+        [Export ("publisher:streamDestroyed:"), EventArgs ("OTPublisherDelegatePublisher")]
+        void StreamDestroyed (OTPublisher publisher, OTStream stream);
 
         [Export ("publisher:didChangeCameraPosition:"), EventArgs ("OTPublisherDelegatePosition")]
         void DidChangeCameraPosition (OTPublisher publisher, AVCaptureDevicePosition position);
     }
 
-    [BaseType (typeof (NSObject),
-        Delegates=new string [] {"Delegate"},
-        Events=new Type [] { typeof (OTPublisherDelegate) })]
+    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTPublisherDelegate) })]
     public partial interface OTPublisher {
 
         [Export ("initWithDelegate:")]
@@ -61,8 +59,8 @@ namespace OpenTok
         [Export ("session")]
         OTSession Session { get; }
 
-        [Export ("view")]
-        OTVideoView View { get; }
+//        [Export ("view")]
+//        OTVideoView View { get; }
 
         [Export ("name", ArgumentSemantic.Copy)]
         string Name { get; set; }
@@ -91,26 +89,27 @@ namespace OpenTok
         [Export ("session:didFailWithError:"), EventArgs ("OTSessionDelegateError")]
         void DidFail (OTSession session, OTError error);
 
-        [Export ("session:didReceiveStream:"), EventArgs ("OTSessionDelegateStream")]
-        void DidReceiveStream (OTSession session, OTStream stream);
+        [Export ("session:streamCreated:"), EventArgs ("OTSessionDelegateStream")]
+        void StreamCreated (OTSession session, OTStream stream);
 
-        [Export ("session:didDropStream:"), EventArgs ("OTSessionDelegateStream")]
-        void DidDropStream (OTSession session, OTStream stream);
+        [Export ("session:streamDestroyed:"), EventArgs ("OTSessionDelegateStream")]
+        void StreamDestroyed (OTSession session, OTStream stream);
 
-        [Export ("session:didCreateConnection:"), EventArgs ("OTSessionDelegateConnection")]
-        void DidCreateConnection (OTSession session, OTConnection connection);
+        [Export ("session:connectionCreated:"), EventArgs ("OTSessionDelegateConnection")]
+        void ConnectionCreated (OTSession session, OTConnection connection);
 
-        [Export ("session:didDropConnection:"), EventArgs ("OTSessionDelegateConnection")]
-        void DidDropConnection (OTSession session, OTConnection connection);
+        [Export ("session:connectionDestroyed:"), EventArgs ("OTSessionDelegateConnection")]
+        void ConnectionDestroyed (OTSession session, OTConnection connection);
+
+        [Export ("session:receivedSignalType:fromConnection:withString:")]
+        void ReceivedSignalType (OTSession session, string type, [NullAllowed] OTConnection connection, string data);
     }
 
     public delegate void OTSessionCompletionHandler (NSError error);
     public delegate void OTSessionRecieveCompletionHandler (string type, NSObject data, OTConnection fromConnection);
 
 
-    [BaseType (typeof (NSObject),
-        Delegates=new string [] {"Delegate"},
-        Events=new Type [] { typeof (OTSessionDelegate) })]
+    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSessionDelegate) })]
     public partial interface OTSession {
 
         [Export ("sessionConnectionStatus")]
@@ -118,9 +117,6 @@ namespace OpenTok
 
         [Export ("sessionId", ArgumentSemantic.Copy)]
         string SessionId { get; set; }
-
-        [Export ("connectionCount")]
-        int ConnectionCount { get; }
 
         [Export ("streams")]
         NSDictionary Streams { get; }
@@ -131,29 +127,23 @@ namespace OpenTok
         [Export ("delegate", ArgumentSemantic.Assign)][NullAllowed]
         IOTSessionDelegate Delegate { get; set; }
 
-        [Export ("initWithSessionId:delegate:")]
-        IntPtr Constructor (string sessionId, [NullAllowed] IOTSessionDelegate SessionDelegate);
+        [Export ("initWithApiKey:sessionId:delegate:")]
+        IntPtr Constructor (string apiKey, string sessionId, [NullAllowed] IOTSessionDelegate SessionDelegate);
 
-        [Export ("connectWithApiKey:token:")]
-        void ConnectWithApiKey (string apiKey, string token);
+        [Export ("connectWithToken:error:")]
+        void ConnectWithToken (string token, OTError error);
 
         [Export ("disconnect")]
         void Disconnect ();
 
-        [Export ("publish:")]
-        void Publish (OTPublisher publisher);
+        [Export ("publish:error:")]
+        void Publish (OTPublisher publisher, OTError error);
 
         [Export ("unpublish:")]
         void Unpublish (OTPublisher publisher);
 
-        [Export ("signalWithType:data:completionHandler:")]
-        void SignalWithType (string type, [NullAllowed] NSObject data, [NullAllowed] OTSessionCompletionHandler handler);
-
-        [Export ("signalWithType:data:connections:completionHandler:")]
-        void SignalWithType (string type, [NullAllowed] NSObject data, [NullAllowed] OTConnection [] connections, [NullAllowed] OTSessionCompletionHandler handler);
-
-        [Export ("receiveSignalType:withHandler:")]
-        bool ReceiveSignalType (string type, [NullAllowed] OTSessionRecieveCompletionHandler handler);
+        [Export ("signalWithType:string:connection:error:")]
+        void SignalWithType (string type, string data, [NullAllowed] OTConnection connection, OTError error);
     }
 
     [BaseType (typeof (NSObject))]
@@ -167,9 +157,6 @@ namespace OpenTok
 
         [Export ("streamId", ArgumentSemantic.Retain)]
         string StreamId { get; }
-
-        [Export ("type")]
-        string Type { get; }
 
         [Export ("creationTime", ArgumentSemantic.Retain)]
         NSDate CreationTime { get; }
@@ -208,9 +195,7 @@ namespace OpenTok
         void VideoDisabled (OTSubscriber subscriber);
     }
 
-    [BaseType (typeof (NSObject),
-        Delegates=new string [] {"Delegate"},
-        Events=new Type [] { typeof (OTSubscriberDelegate) })]
+    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSubscriberDelegate) })]
     public partial interface OTSubscriber {
 
         [Export ("session")]
@@ -219,8 +204,8 @@ namespace OpenTok
         [Export ("stream")]
         OTStream Stream { get; }
 
-        [Export ("view")]
-        OTVideoView View { get; }
+//        [Export ("view")]
+//        OTVideoView View { get; }
 
         [Export ("delegate", ArgumentSemantic.Assign)][NullAllowed]
         IOTSubscriberDelegate Delegate { get; set; }
@@ -238,18 +223,18 @@ namespace OpenTok
         void Close ();
     }
 
-    public delegate void OTVideoViewGetImageHandler (UIImage snapshot);
+//    public delegate void OTVideoViewGetImageHandler (UIImage snapshot);
 
-    [BaseType (typeof (UIView))]
-    public partial interface OTVideoView {
-
-        [Export ("toolbarView", ArgumentSemantic.Retain)]
-        UIView ToolbarView { get; }
-
-        [Export ("videoView")]
-        UIView VideoView { get; }
-
-        [Export ("getImageWithBlock:")]
-        void GetImageWithBlock (OTVideoViewGetImageHandler handler);
-    }
+//    [BaseType (typeof (UIView))]
+//    public partial interface OTVideoView {
+//
+//        [Export ("toolbarView", ArgumentSemantic.Retain)]
+//        UIView ToolbarView { get; }
+//
+//        [Export ("videoView")]
+//        UIView VideoView { get; }
+//
+//        [Export ("getImageWithBlock:")]
+//        void GetImageWithBlock (OTVideoViewGetImageHandler handler);
+//    }
 }

@@ -4,40 +4,31 @@ namespace OpenTok
 {
     public enum OTSessionErrorCode  {
         AuthorizationFailure,
-        InvalidSessionId,
+        InvalidSession,
         ConnectionFailed,
         NoMessagingServer,
-        DKUpdateRequired,
         ConnectionRefused,
         StateFailed,
-        P2PSessionUnsupported,
-        UnknownServerError,
-        P2PSessionRequired,
         P2PSessionMaxParticipants,
         ConnectionTimeout,
-        CompatibilityMismatch,
-        SignalConnection
+        InvalidSignalType,
+        SignalDataTooLong
     }
 
     public enum OTPublisherErrorCode {
-        NoMediaPublished,
-        UserDeniedCameraAccess,
+        PublisherInternalError,
         SessionDisconnected
     }
 
     public enum OTSubscriberErrorCode {
-        FailedToConnect,
-        ConnectionTimedOut,
-        NoStreamMedia,
-        InitializationFailure,
-        InvalidStreamType,
-        elfSubscribeFailure
+        SubscriberInternalError,
+        ConnectionTimedOut
     }
 
     public enum OTSessionConnectionStatus {
         Connected,
         Connecting,
-        Disconnected,
+        NotConnected,
         Failed
     }
 }

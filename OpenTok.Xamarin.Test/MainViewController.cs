@@ -43,7 +43,7 @@ namespace OpenTok.Xamarin.Test
         {
             base.ViewDidLoad();
 			
-            _session = new OTSession(kSessionId, new SessionDelegate(this));
+            _session = new OTSession(kApiKey, kSessionId, new SessionDelegate(this));
 
             DoConnect();
         }
@@ -53,6 +53,7 @@ namespace OpenTok.Xamarin.Test
             foreach(var streamId in _session.Streams)
             {
                 var stream = (OTStream)streamId.Value;
+
                 if (!Equals(stream.Connection.ConnectionId, _session.Connection.ConnectionId))
                 {
                     _subscriber = new OTSubscriber(stream, new SubDelegate(this));
@@ -62,7 +63,14 @@ namespace OpenTok.Xamarin.Test
         }
         private void DoConnect()
         {
-            _session.ConnectWithApiKey (kApiKey, kToken);
+            OTError error = null;
+
+            _session.ConnectWithToken (kToken, error);
+
+            if (error != null)
+            {
+                this.ShowAlert(error.Description);
+            }
         }
 
         private void ShowAlert(string message)
@@ -80,7 +88,14 @@ namespace OpenTok.Xamarin.Test
             _publisher = new OTPublisher(new PubDelegate(this));
             _publisher.Name = UIDevice.CurrentDevice.Name;
 
-            _session.Publish(_publisher);
+            OTError error = null;
+
+            _session.Publish(_publisher, error);
+
+            if (error != null)
+            {
+                this.ShowAlert(error.Description);
+            }
 
             View.AddSubview(_publisher.View);
             _publisher.View.Frame = new RectangleF(0, 0, widgetWidth, widgetHeight);
@@ -106,20 +121,10 @@ namespace OpenTok.Xamarin.Test
                 _this = This;
             }
 
-            public override void DidCreateConnection(OTSession session, OTConnection connection)
-            {
-                Debug.WriteLine("DidCreateConnection ({0})", connection.ConnectionId);
-            }
-
             public override void DidConnect(OTSession session)
             {
                 Debug.WriteLine("Did Connect {0}", session.SessionId);
                 _this.DoPublish();
-            }
-
-            public override void DidDropConnection(OTSession session, OTConnection connection)
-            {
-                Debug.WriteLine("DidDropConnection ({0})", connection.ConnectionId);
             }
 
             public override void DidFail(OTSession session, OTError error)
@@ -129,22 +134,6 @@ namespace OpenTok.Xamarin.Test
                 _this.ShowAlert(msg);
             }
 
-            public override void DidDropStream(OTSession session, OTStream stream)
-            {
-                Debug.WriteLine("DidDropStream ({0})", stream.StreamId);
-                if(_this._subscriber != null)
-                    Debug.WriteLine("_subscriber.Stream.StreamId ({0})", _this._subscriber.Stream.StreamId);
-
-                if(!_this.subscribeToSelf 
-                    && _this._subscriber != null
-                    && Equals(_this._subscriber.Stream.StreamId, stream.StreamId))
-                {
-                    _this._subscriber.Dispose();
-                    _this._subscriber = null;
-                    _this.UpdateSubscriber();
-                }
-            }
-
             public override void DidDisconnect(OTSession session)
             {
                 var msg = string.Format("Session disconnected: ({0})", session.SessionId);
@@ -152,7 +141,17 @@ namespace OpenTok.Xamarin.Test
                 _this.ShowAlert(msg);
             }
 
-            public override void DidReceiveStream(OTSession session, OTStream stream)
+            public override void ConnectionCreated(OTSession session, OTConnection connection)
+            {
+                Debug.WriteLine("DidCreateConnection ({0})", connection.ConnectionId);
+            }
+
+            public override void ConnectionDestroyed(OTSession session, OTConnection connection)
+            {
+                Debug.WriteLine("DidDropConnection ({0})", connection.ConnectionId);
+            }
+
+            public override void StreamCreated(OTSession session, OTStream stream)
             {
                 Debug.WriteLine("DidReceiveStream ({0})", stream.StreamId);
 
@@ -169,7 +168,21 @@ namespace OpenTok.Xamarin.Test
                 }
             }
 
+            public override void StreamDestroyed(OTSession session, OTStream stream)
+            {
+                Debug.WriteLine("DidDropStream ({0})", stream.StreamId);
+                if(_this._subscriber != null)
+                    Debug.WriteLine("_subscriber.Stream.StreamId ({0})", _this._subscriber.Stream.StreamId);
 
+                if(!_this.subscribeToSelf 
+                    && _this._subscriber != null
+                    && Equals(_this._subscriber.Stream.StreamId, stream.StreamId))
+                {
+                    _this._subscriber.Dispose();
+                    _this._subscriber = null;
+                    _this.UpdateSubscriber();
+                }
+            }
         }
 
         private class SubDelegate : OTSubscriberDelegate
@@ -220,11 +233,11 @@ namespace OpenTok.Xamarin.Test
             }
 
 
-            public override void DidStartStreaming(OTPublisher publisher)
+            public override void StreamCreated(OTPublisher publisher, OTStream stream)
             {
 
             }
-            public override void DidStopStreaming(OTPublisher publisher)
+            public override void StreamDestroyed(OTPublisher publisher, OTStream stream)
             {
 
             }
