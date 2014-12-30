@@ -1,0 +1,112 @@
+Dec 30 11:27:43 Tim-Ricciardis-iPod kernel[0] <Notice>: xpcproxy[3016] Container: /private/var/mobile/Containers/Data/Application/CE86CE68-B3BB-4EB2-8982-F95D5AC36382 (sandbox)
+Dec 30 11:27:43 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: LICreateIconForImage passed NULL CGImageRef image
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: 
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: ------------------------------------------------
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: OpenTok iOS Library, Rev.2
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: This build was born on Oct  9 2014 at 15:39:11
+Dec 30 11:27:43 Tim-Ricciardis-iPod locationd[63] <Notice>: Gesture EnabledForTopCLient: 0, EnabledInDaemonSettings: 0
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: Could not successfully update network info during initialization.
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: Version: 2.3.1.5D747E70-ios
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: libOpenTokObjC:a95b84edc2a3a1e2b4cb4bc2092cb90ca43cbb05
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: libOTKit:31f8dbf14c1ae37b9c95d5b2d83fd6c737d89f72
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: WebRTC:7113
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: Copyright 2014 TokBox, Inc.
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: Licensed under the Apache License, Version 2.0
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: ------------------------------------------------
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.542 [0x2361000] AudioSessionSetProperty: WARNING translating CMSession error: -12981
+Dec 30 11:27:43 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Warning>: WARNING[OpenTok]: Failed to set mode video chat
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.551 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.579 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.664 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.667 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.704 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.725 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:43 Tim-Ricciardis-iPod mediaserverd[35] <Warning>: 11:27:43.829 WARNING:   [0x2361000] >va> 537: Unable to locate a set of sub-ports.
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: assertion failed: 12B435: libxpc.dylib + 51955 [6D3E948A-39BD-3548-AA90-38575933BDEF]: 0x7d
+Dec 30 11:27:46 Tim-Ricciardis-iPod Unknown[3016] <Error>: 
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: Stacktrace:
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at <unknown> <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at (wrapper managed-to-native) MonoTouch.ObjCRuntime.Messaging.IntPtr_objc_msgSend (intptr,intptr) <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at MonoTouch.Foundation.NSObject.get_Description () [0x0000b] in /Developer/MonoTouch/Source/monotouch/src/build/compat/Foundation/NSObject.g.cs:619
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at OpenTok.Xamarin.Test.MainViewController.DoConnect () [0x00021] in /Users/Tim/_Development/OpenTok.Xamarin/OpenTok.Xamarin.Test/MainViewController.cs:47
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at OpenTok.Xamarin.Test.MainViewController.ViewDidLoad () [0x00023] in /Users/Tim/_Development/OpenTok.Xamarin/OpenTok.Xamarin.Test/MainViewController.cs:36
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at (wrapper runtime-invoke) object.runtime_invoke_dynamic (intptr,intptr,intptr,intptr) <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at <unknown> <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at (wrapper managed-to-native) MonoTouch.UIKit.UIApplication.UIApplicationMain (int,string[],intptr,intptr) <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at MonoTouch.UIKit.UIApplication.Main (string[],intptr,intptr) [0x00005] in /Developer/MonoTouch/Source/monotouch/src/UIKit/UIApplication.cs:62
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at MonoTouch.UIKit.UIApplication.Main (string[],string,string) [0x0001c] in /Developer/MonoTouch/Source/monotouch/src/UIKit/UIApplication.cs:45
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at OpenTok.Xamarin.Test.Application.Main (string[]) [0x00008] in /Users/Tim/_Development/OpenTok.Xamarin/OpenTok.Xamarin.Test/Main.cs:17
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>:   at (wrapper runtime-invoke) object.runtime_invoke_dynamic (intptr,intptr,intptr,intptr) <0xffffffff>
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 
+	Native stacktrace:
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	0   OpenTokXamarinTest                  0x0056c43d mono_handle_native_sigsegv + 240
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	1   OpenTokXamarinTest                  0x00574b51 mono_sigsegv_signal_handler + 208
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	2   libsystem_platform.dylib            0x3655c0a3 _sigtramp + 42
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	3   OpenTokXamarinTest                  0x000c00a0 wrapper_managed_to_native_MonoTouch_ObjCRuntime_Messaging_IntPtr_objc_msgSend_intptr_intptr + 100
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	4   OpenTokXamarinTest                  0x000991d4 MonoTouch_Foundation_NSObject_get_Description + 52
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	5   OpenTokXamarinTest                  0x00093830 OpenTok_Xamarin_Test_MainViewController_DoConnect + 348
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	6   OpenTokXamarinTest                  0x000936a8 OpenTok_Xamarin_Test_MainViewController_ViewDidLoad + 356
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	7   OpenTokXamarinTest                  0x0016256c wrapper_runtime_invoke_object_runtime_invoke_dynamic_intptr_intptr_intptr_intptr + 200
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	8   OpenTokXamarinTest                  0x00576d4b mono_jit_runtime_invoke + 1158
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	9   OpenTokXamarinTest                  0x005b05a9 mono_runtime_invoke + 88
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	10  OpenTokXamarinTest                  0x001abd43 native_to_managed_trampoline_6 + 182
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	11  OpenTokXamarinTest                  0x001acc21 -[MainViewController viewDidLoad] + 52
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	12  UIKit                               0x2bbf246d <redacted> + 600
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	13  UIKit                               0x2bc9c325 <redacted> + 32
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	14  UIKit                               0x2bc9c24d <redacted> + 228
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	15  UIKit                               0x2bc9b7d1 <redacted> + 64
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	16  UIKit                               0x2bc9b50b <redacted> + 578
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	17  UIKit                               0x2bc9b271 <redacted> + 44
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	18  UIKit                               0x2bc9b209 <redacted> + 184
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	19  UIKit                               0x2bbef97f <redacted> + 514
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	20  QuartzCore                          0x2b61af65 <redacted> + 136
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	21  QuartzCore                          0x2b616951 <redacted> + 360
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	22  QuartzCore                          0x2b6167d9 <redacted> + 16
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	23  QuartzCore                          0x2b6161c7 <redacted> + 222
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	24  QuartzCore                          0x2b615fd1 <redacted> + 324
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	25  UIKit                               0x2be538ed <redacted> + 44
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	26  UIKit                               0x2be54685 <redacted> + 2500
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	27  UIKit                               0x2be5eac9 <redacted> + 36
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	28  UIKit                               0x2be52abb <redacted> + 130
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	29  FrontBoardServices                  0x2ee9b0c9 <redacted> + 12
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	30  CoreFoundation                      0x28710ffd <redacted> + 12
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	31  CoreFoundation                      0x287102c1 <redacted> + 216
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	32  CoreFoundation                      0x2870ee1b <redacted> + 1714
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	33  CoreFoundation                      0x2865bb31 CFRunLoopRunSpecific + 476
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	34  CoreFoundation                      0x2865b943 CFRunLoopRunInMode + 106
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	35  UIKit                               0x2bc568f7 <redacted> + 558
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	36  UIKit                               0x2bc516f1 UIApplicationMain + 1440
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	37  OpenTokXamarinTest                  0x000c1f20 wrapper_managed_to_native_MonoTouch_UIKit_UIApplication_UIApplicationMain_int_string___intptr_intptr + 272
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	38  OpenTokXamarinTest                  0x000ab408 MonoTouch_UIKit_UIApplication_Main_string___intptr_intptr + 52
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	39  OpenTokXamarinTest                  0x000ab3c8 MonoTouch_UIKit_UIApplication_Main_string___string_string + 204
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	40  OpenTokXamarinTest                  0x000930bc OpenTok_Xamarin_Test_Application_Main_string__ + 172
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	41  OpenTokXamarinTest                  0x0016256c wrapper_runtime_invoke_object_runtime_invoke_dynamic_intptr_intptr_intptr_intptr + 200
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	42  OpenTokXamarinTest                  0x00576d4b mono_jit_runtime_invoke + 1158
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	43  OpenTokXamarinTest                  0x005b05a9 mono_runtime_invoke + 88
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	44  OpenTokXamarinTest                  0x005b3833 mono_runtime_exec_main + 282
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	45  OpenTokXamarinTest                  0x005b367b mono_runtime_run_main + 438
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	46  OpenTokXamarinTest                  0x005657c9 mono_jit_exec + 48
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	47  OpenTokXamarinTest                  0x005e2474 monotouch_main + 2292
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	48  OpenTokXamarinTest                  0x001adefd main + 108
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 	49  libdyld.dylib                       0x3641caaf <redacted> + 2
+Dec 30 11:27:46 Tim-Ricciardis-iPod OpenTokXamarinTest[3016] <Error>: 
+	=================================================================
+	Got a SIGSEGV while executing native code. This usually indicates
+	a fatal error in the mono runtime or one of the native libraries 
+	used by your application.
+	=================================================================
+Dec 30 11:27:46 Tim-Ricciardis-iPod ReportCrash[3017] <Error>: task_set_exception_ports(B07, 400, D03, 0, 0) failed with error (4: (os/kern) invalid argument)
+Dec 30 11:27:46 Tim-Ricciardis-iPod ReportCrash[3017] <Notice>: ReportCrash acting against PID 3016
+Dec 30 11:27:46 Tim-Ricciardis-iPod ReportCrash[3017] <Notice>: Formulating crash report for process OpenTokXamarinTest[3016]
+Dec 30 11:27:46 Tim-Ricciardis-iPod mediaserverd[35] <Error>: 11:27:46.965 [0x2361000] Cannot get ClientInfo for id: 0x24705
+Dec 30 11:27:46 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: BSXPCMessage received error for message: Connection invalid
+Dec 30 11:27:47 Tim-Ricciardis-iPod mediaserverd[35] <Notice>: '' com.us.techone.OpenTok.Xamarin.Test(pid = 3016) setting DiscoveryMode = DiscoveryMode_None, currentDiscoveryMode = DiscoveryMode_None
+Dec 30 11:27:47 Tim-Ricciardis-iPod com.apple.xpc.launchd[1] (UIKitApplication:com.us.techone.OpenTok.Xamarin.Test[0x4b07][3016]) <Notice>: Service exited due to signal: Abort trap: 6
+Dec 30 11:27:47 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: Unable to get short BSD proc info for 3016: No such process
+Dec 30 11:27:47 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: Unable to get short BSD proc info for 3016: No such process
+Dec 30 11:27:47 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: Application 'UIKitApplication:com.us.techone.OpenTok.Xamarin.Test[0x4b07]' crashed.
+Dec 30 11:27:47 Tim-Ricciardis-iPod UserEventAgent[17] <Warning>: id=com.us.techone.OpenTok.Xamarin.Test pid=3016, state=0
+Dec 30 11:27:47 Tim-Ricciardis-iPod SpringBoard[42] <Warning>: Unable to deliver -[UIRemoteApplication showTopMostMiniAlertWithSynchronizationPort:] message to port 0: (ipc/send) invalid destination port
+Dec 30 11:27:47 Tim-Ricciardis-iPod ReportCrash[3017] <Notice>: Saved report to /var/mobile/Library/Logs/CrashReporter/OpenTokXamarinTest_2014-12-30-112746_Tim-Ricciardis-iPod.ips
+Dec 30 11:27:47 Tim-Ricciardis-iPod locationd[63] <Notice>: Gesture EnabledForTopCLient: 0, EnabledInDaemonSettings: 0
+Dec 30 11:27:52 Tim-Ricciardis-iPod locationd[63] <Notice>: Gesture EnabledForTopCLient: 0, EnabledInDaemonSettings: 0
