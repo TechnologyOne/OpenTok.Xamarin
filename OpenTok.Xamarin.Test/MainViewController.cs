@@ -16,16 +16,12 @@ namespace OpenTok.Xamarin.Test
         static readonly float widgetWidth = 320;
 
         // *** Fill the following variables using your own Project info from the Dashboard  ***
-        // ***                   https://dashboard.tokbox.com/projects  
-        const string kApiKey = "";
+        // *** https://dashboard.tokbox.com/projects  
+        const string _apiKey = "45117962";
+        const string _sessionId = @"2_MX40NTExNzk2Mn5-MTQxOTk1NzExOTM3OX5LZHdFTHJaOS8vYVdKbGRNMXZnRnB5Tm5-fg"; 
+        const string _token = @"T1==cGFydG5lcl9pZD00NTExNzk2MiZzaWc9MTNjNzI1MzllM2Q4NWFiODAyZmNjZjg4NWE3MTcwMzU0ODdmNjAzYzpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5URXhOemsyTW41LU1UUXhPVGsxTnpFeE9UTTNPWDVMWkhkRlRISmFPUzh2WVZkS2JHUk5NWFpuUm5CNVRtNS1mZyZjcmVhdGVfdGltZT0xNDE5OTU3MTU4Jm5vbmNlPTAuMjkwMDY3Mjg4NzY3NjUyNjQmZXhwaXJlX3RpbWU9MTQyMjU0OTA4MA==";     
 
-        // Replace with your generated session ID
-        const string kSessionId = @""; 
-        // Replace with your generated token (use the Dashboard or an OpenTok server-side library)
-        const string kToken = @"";     
-
-
-        bool subscribeToSelf = true; // Change to false to subscribe to streams other than your own.
+        bool _subscribeToSelf = true; // Change to false to subscribe to streams other than your own.
 
         public MainViewController() : base("MainViewController", null)
         {
@@ -34,34 +30,26 @@ namespace OpenTok.Xamarin.Test
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-			
-            _session = new OTSession(kApiKey, kSessionId, new SessionDelegate(this));
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            _session = new OTSession(_apiKey, _sessionId, new SessionDelegate(this));
 
             DoConnect();
         }
 
-//        private void UpdateSubscriber()
-//        {
-//            foreach(var streamId in _session.Streams)
-//            {
-//                var stream = (OTStream)streamId.Value;
-//
-//                if (!Equals(stream.Connection.ConnectionId, _session.Connection.ConnectionId))
-//                {
-//                    _subscriber = new OTSubscriber(stream, new SubDelegate(this));
-//                    break;
-//                }
-//            }
-//        }
-
         private void DoConnect()
         {
-            OTError error = null;
+            OTError error = new OTError();
 
-            _session.ConnectWithToken (kToken, error);
+            _session.ConnectWithToken (_token, error);
 
             if (error != null)
             {
+                Console.WriteLine(error.Description);
                 this.ShowAlert(error.Description);
             }
         }
@@ -75,7 +63,7 @@ namespace OpenTok.Xamarin.Test
         {
             _publisher = new OTPublisher(new PubDelegate(this), UIDevice.CurrentDevice.Name);
 
-            OTError error = null;
+            OTError error = new OTError();
 
             _session.Publish(_publisher, error);
 
@@ -111,7 +99,7 @@ namespace OpenTok.Xamarin.Test
         {
             _subscriber = new OTSubscriber(stream, new SubDelegate(this));
 
-            OTError error = null;
+            OTError error = new OTError();
 
             _session.Subscribe(_subscriber, error);
 
@@ -136,6 +124,7 @@ namespace OpenTok.Xamarin.Test
         private class SessionDelegate : OTSessionDelegate
         {
             private MainViewController _this;
+
             public SessionDelegate(MainViewController This)
             {
                 _this = This;
@@ -185,7 +174,7 @@ namespace OpenTok.Xamarin.Test
             {
                 Debug.WriteLine("StreamCreated ({0})", stream.StreamId);
 
-                if(_this._subscriber == null && !_this.subscribeToSelf)
+                if(_this._subscriber == null && !_this._subscribeToSelf)
                 {
                     _this.DoSubscribe(stream);
                 }
@@ -205,15 +194,10 @@ namespace OpenTok.Xamarin.Test
         private class SubDelegate : OTSubscriberDelegate
         {
             private MainViewController _this;
+
             public SubDelegate(MainViewController This)
             {
                 _this = This;
-
-            }
-
-
-            public override void DidChangeVideoDimensions(OTStream stream, SizeF dimensions)
-            {
 
             }
 
@@ -237,14 +221,10 @@ namespace OpenTok.Xamarin.Test
         private class PubDelegate : OTPublisherDelegate
         {
             private MainViewController _this;
+
             public PubDelegate(MainViewController This)
             {
                 _this = This;
-            }
-
-            public override void DidChangeCameraPosition(OTPublisher publisher, MonoTouch.AVFoundation.AVCaptureDevicePosition cameraPosition)
-            {
-
             }
 
             public override void DidFail(OTPublisher publisher, OTError error)
@@ -263,7 +243,7 @@ namespace OpenTok.Xamarin.Test
                 // all participants in the OpenTok session. We will attempt to subscribe to
                 // our own stream. Expect to see a slight delay in the subscriber video and
                 // an echo of the audio coming from the device microphone.
-                if (_this._subscriber == null && _this.subscribeToSelf)
+                if (_this._subscriber == null && _this._subscribeToSelf)
                 {
                     _this.DoSubscribe(stream);
                 }
@@ -279,26 +259,11 @@ namespace OpenTok.Xamarin.Test
             }
         }
 
-        private class AlertViewDelegate : UIAlertViewDelegate
-        {
-            public override void Clicked(UIAlertView alertview, int buttonIndex)
-            {
-
-            }
-            public override void Canceled(UIAlertView alertView)
-            {
-
-            }
-        }
-
         private void ShowAlert(string message)
         {
-            var alertView = new UIAlertView("Message from video session",
-                message,
-                new AlertViewDelegate(),
-                "OK");
+            var alert = new UIAlertView ("Alert", message, null, "Ok", null);
 
-            alertView.Show();
+            alert.Show ();
         }
     }
 }

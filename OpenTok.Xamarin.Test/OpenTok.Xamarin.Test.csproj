@@ -73,7 +73,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
-    <MtouchExtraArgs>--registrar:static -v -v -v</MtouchExtraArgs>
+    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
     <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
@@ -104,9 +104,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="OpenTok">
-      <HintPath>..\OpenTok.Xamarin.Binding\bin\Release\OpenTok.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -126,5 +123,11 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <InterfaceDefinition Include="MainViewController.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenTok.Xamarin.Binding\OpenTok.Xamarin.Binding.csproj">
+      <Project>{3A024B7C-31FB-4B06-A51F-7E56227BE9B5}</Project>
+      <Name>OpenTok.Xamarin.Binding</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

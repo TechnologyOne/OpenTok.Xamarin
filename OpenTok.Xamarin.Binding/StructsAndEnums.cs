@@ -3,32 +3,60 @@
 namespace OpenTok
 {
     public enum OTSessionErrorCode  {
-        AuthorizationFailure,
-        InvalidSession,
-        ConnectionFailed,
-        NoMessagingServer,
-        ConnectionRefused,
-        StateFailed,
-        P2PSessionMaxParticipants,
-        ConnectionTimeout,
-        InvalidSignalType,
-        SignalDataTooLong
+        OTSessionSuccess = 0,
+        OTAuthorizationFailure = 1004,
+        OTErrorInvalidSession = 1005,
+        OTConnectionFailed = 1006,
+        OTNullOrInvalidParameter = 1011,
+        OTNotConnected = 1010,
+        OTSessionIllegalState = 1015,
+        OTNoMessagingServer = 1503,
+        OTConnectionRefused = 1023,
+        OTSessionStateFailed = 1020,
+        OTP2PSessionMaxParticipants = 1403,
+        OTSessionConnectionTimeout = 1021,
+        OTSessionInternalError = 2000,
+        OTSessionInvalidSignalType = 1461,
+        OTSessionSignalDataTooLong = 1413,
+        OTConnectionDropped = 1022,
+        OTSessionSubscriberNotFound = 1112,
+        OTSessionPublisherNotFound = 1113
     }
 
     public enum OTPublisherErrorCode {
-        PublisherInternalError,
-        SessionDisconnected
+        OTPublisherSuccess = 0,
+        OTSessionDisconnected = 1010,
+        OTPublisherInternalError = 2000,
+        OTPublisherWebRTCError = 1610
     }
 
     public enum OTSubscriberErrorCode {
-        SubscriberInternalError,
-        ConnectionTimedOut
+        OTSubscriberSuccess = 0,
+        OTConnectionTimedOut = 1542,
+        OTSubscriberSessionDisconnected = 1541,
+        OTSubscriberWebRTCError = 1600,
+        OTSubscriberServerCannotFindStream = 1604,
+        OTSubscriberInternalError = 2000
     }
 
     public enum OTSessionConnectionStatus {
-        Connected,
-        Connecting,
-        NotConnected,
-        Failed
+        OTSessionConnectionStatusNotConnected,
+        OTSessionConnectionStatusConnected,
+        OTSessionConnectionStatusConnecting,
+        OTSessionConnectionStatusDisconnecting,
+        OTSessionConnectionStatusFailed
+    }
+
+    public enum OTVideoOrientation {
+        OTVideoOrientationUp = 1,
+        OTVideoOrientationDown = 2,
+        OTVideoOrientationLeft = 3,
+        OTVideoOrientationRight = 4
+    }
+
+    public enum OTSubscriberVideoEventReason {
+        OTSubscriberVideoEventPublisherPropertyChanged = 1,
+        OTSubscriberVideoEventSubscriberPropertyChanged = 2,
+        OTSubscriberVideoEventQualityChanged = 3
     }
 }
