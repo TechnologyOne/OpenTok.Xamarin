@@ -7,4 +7,3 @@ Binding and Test Project for OpenTok iOS SDK version 2.3.1
 
 - Copy the Binary file OpenTok from the SDK to the root of the Binding project
 
-STATUS:  Curently compiles but Crashes at Startup.  See Device.Logs for details.  Currently working with TokBox on a Resolution
