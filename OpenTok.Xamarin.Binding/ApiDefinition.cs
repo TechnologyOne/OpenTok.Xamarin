@@ -31,7 +31,7 @@ namespace OpenTok
     public partial interface OTPublisherDelegate {
 
         [Export ("publisher:didFailWithError:"), EventArgs ("OTPublisherDelegateError")]
-        void DidFail (OTPublisher publisher, OTError error);
+        void DidFailWithError (OTPublisher publisher, OTError error);
 
         [Export ("publisher:streamCreated:"), EventArgs ("OTPublisherDelegatePublisher")]
         void StreamCreated (OTPublisher publisher, OTStream stream);
@@ -86,7 +86,7 @@ namespace OpenTok
         void DidDisconnect (OTSession session);
 
         [Export ("session:didFailWithError:"), EventArgs ("OTSessionDelegateError")]
-        void DidFail (OTSession session, OTError error);
+        void DidFailWithError (OTSession session, OTError error);
 
         [Export ("session:streamCreated:"), EventArgs ("OTSessionDelegateStream")]
         void StreamCreated (OTSession session, OTStream stream);
@@ -100,8 +100,8 @@ namespace OpenTok
         [Export ("session:connectionDestroyed:"), EventArgs ("OTSessionDelegateConnection")]
         void ConnectionDestroyed (OTSession session, OTConnection connection);
 
-//        [Export ("session:receivedSignalType:fromConnection:withString:")]
-//        void ReceivedSignalType (OTSession session, string type, OTConnection connection, string data);
+        [Export ("session:receivedSignalType:fromConnection:withString:"), EventArgs("OTSessionDelegateSignal")]
+        void ReceivedSignalType (OTSession session, string type, OTConnection connection, string data);
     }
 
     [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSessionDelegate) })]
@@ -126,22 +126,22 @@ namespace OpenTok
         IntPtr Constructor (string apiKey, string sessionId, [NullAllowed] IOTSessionDelegate SessionDelegate);
 
         [Export ("connectWithToken:error:")]
-        void ConnectWithToken (string token, OTError error);
+        void ConnectWithToken (string token, out OTError error);
 
         [Export ("disconnect")]
         void Disconnect ();
 
         [Export ("publish:error:")]
-        void Publish (OTPublisher publisher, OTError error);
+        void Publish (OTPublisher publisher, out OTError error);
 
         [Export ("unpublish:error:")]
-        void Unpublish (OTPublisher publisher, OTError error);
+        void Unpublish (OTPublisher publisher, out OTError error);
 
         [Export ("subscribe:error:")]
-        void Subscribe (OTSubscriber subscriber, OTError error);
+        void Subscribe (OTSubscriber subscriber, out OTError error);
 
         [Export ("unsubscribe:error:")]
-        void Unsubscribe (OTSubscriber subscriber, OTError error);
+        void Unsubscribe (OTSubscriber subscriber, out OTError error);
 
         [Export ("signalWithType:string:connection:error:")]
         void SignalWithType (string type, string data, [NullAllowed] OTConnection connection, OTError error);
@@ -184,7 +184,7 @@ namespace OpenTok
         void DidConnectToStream (OTSubscriber subscriber);
 
         [Export ("subscriber:didFailWithError:"), EventArgs ("OTSubscriberDelegateError")]
-        void DidFail (OTSubscriber subscriber, OTError error);
+        void DidFailWithError (OTSubscriber subscriber, OTError error);
 
         [Export ("subscriberVideoDataReceived:"), EventArgs ("OTSubscriberDelegateSubscriber")]
         void VideoDataReceived (OTSubscriber subscriber);

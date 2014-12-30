@@ -54,6 +54,17 @@ namespace OpenTok
         OTVideoOrientationRight = 4
     }
 
+    public enum OTPixelFormat {
+        I420 = 1228157488 /* 'I420' */,
+        ARGB = 1095911234 /* 'ARGB' */,
+        NV12 = 1314271538 /* 'NV12' */
+    }
+
+    public enum OTVideoViewType {
+        Subscriber,
+        Publisher
+    }
+
     public enum OTSubscriberVideoEventReason {
         OTSubscriberVideoEventPublisherPropertyChanged = 1,
         OTSubscriberVideoEventSubscriberPropertyChanged = 2,

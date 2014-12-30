@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using OpenTok;
 
 namespace OpenTok.Xamarin.Test
 {
@@ -43,13 +44,12 @@ namespace OpenTok.Xamarin.Test
 
         private void DoConnect()
         {
-            OTError error = new OTError();
+            OTError error;
 
-            _session.ConnectWithToken (_token, error);
+            _session.ConnectWithToken (_token, out error);
 
             if (error != null)
             {
-                Console.WriteLine(error.Description);
                 this.ShowAlert(error.Description);
             }
         }
@@ -63,9 +63,9 @@ namespace OpenTok.Xamarin.Test
         {
             _publisher = new OTPublisher(new PubDelegate(this), UIDevice.CurrentDevice.Name);
 
-            OTError error = new OTError();
+            OTError error;
 
-            _session.Publish(_publisher, error);
+            _session.Publish(_publisher, out error);
 
             if (error != null)
             {
@@ -99,9 +99,9 @@ namespace OpenTok.Xamarin.Test
         {
             _subscriber = new OTSubscriber(stream, new SubDelegate(this));
 
-            OTError error = new OTError();
+            OTError error;
 
-            _session.Subscribe(_subscriber, error);
+            _session.Subscribe(_subscriber, out error);
 
             if (error != null)
             {
@@ -137,7 +137,7 @@ namespace OpenTok.Xamarin.Test
                 _this.DoPublish();
             }
 
-            public override void DidFail(OTSession session, OTError error)
+            public override void DidFailWithError(OTSession session, OTError error)
             {
                 var msg = string.Format("There was an error connecting to session {0}", session.SessionId);
 
@@ -198,7 +198,6 @@ namespace OpenTok.Xamarin.Test
             public SubDelegate(MainViewController This)
             {
                 _this = This;
-
             }
 
             public override void DidConnectToStream(OTSubscriber subscriber)
@@ -208,7 +207,7 @@ namespace OpenTok.Xamarin.Test
                 _this.View.AddSubview(_this._subscriber.View);
             }
 
-            public override void DidFail(OTSubscriber subscriber, OTError error)
+            public override void DidFailWithError(OTSubscriber subscriber, OTError error)
             {
                 Debug.WriteLine("Subscriber {0} DidFailWithError {1}", subscriber.Stream.StreamId, error);
 
@@ -227,7 +226,7 @@ namespace OpenTok.Xamarin.Test
                 _this = This;
             }
 
-            public override void DidFail(OTPublisher publisher, OTError error)
+            public override void DidFailWithError(OTPublisher publisher, OTError error)
             {
                 Debug.WriteLine("Publisher DidFail {0}", error);
 
