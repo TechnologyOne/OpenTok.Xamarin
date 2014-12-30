@@ -7,7 +7,6 @@ using MonoTouch.AVFoundation;
 
 namespace OpenTok
 {
-
     [BaseType (typeof (NSObject))]
     public partial interface OTConnection {
 
@@ -59,8 +58,8 @@ namespace OpenTok
         [Export ("session")]
         OTSession Session { get; }
 
-//        [Export ("view")]
-//        OTVideoView View { get; }
+        [Export ("view")]
+        UIView View { get; }
 
         [Export ("name", ArgumentSemantic.Copy)]
         string Name { get; set; }
@@ -101,13 +100,9 @@ namespace OpenTok
         [Export ("session:connectionDestroyed:"), EventArgs ("OTSessionDelegateConnection")]
         void ConnectionDestroyed (OTSession session, OTConnection connection);
 
-        [Export ("session:receivedSignalType:fromConnection:withString:")]
-        void ReceivedSignalType (OTSession session, string type, [NullAllowed] OTConnection connection, string data);
+//        [Export ("session:receivedSignalType:fromConnection:withString:")]
+//        void ReceivedSignalType (OTSession session, string type, OTConnection connection, string data);
     }
-
-    public delegate void OTSessionCompletionHandler (NSError error);
-    public delegate void OTSessionRecieveCompletionHandler (string type, NSObject data, OTConnection fromConnection);
-
 
     [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSessionDelegate) })]
     public partial interface OTSession {
@@ -139,8 +134,14 @@ namespace OpenTok
         [Export ("publish:error:")]
         void Publish (OTPublisher publisher, OTError error);
 
-        [Export ("unpublish:")]
-        void Unpublish (OTPublisher publisher);
+        [Export ("unpublish:error:")]
+        void Unpublish (OTPublisher publisher, OTError error);
+
+        [Export ("subscribe:error:")]
+        void Subscribe (OTSubscriber subscriber, OTError error);
+
+        [Export ("unsubscribe:error:")]
+        void Unsubscribe (OTSubscriber subscriber, OTError error);
 
         [Export ("signalWithType:string:connection:error:")]
         void SignalWithType (string type, string data, [NullAllowed] OTConnection connection, OTError error);
@@ -204,8 +205,8 @@ namespace OpenTok
         [Export ("stream")]
         OTStream Stream { get; }
 
-//        [Export ("view")]
-//        OTVideoView View { get; }
+        [Export ("view")]
+        UIView View { get; }
 
         [Export ("delegate", ArgumentSemantic.Assign)][NullAllowed]
         IOTSubscriberDelegate Delegate { get; set; }
@@ -222,19 +223,4 @@ namespace OpenTok
         [Export ("close")]
         void Close ();
     }
-
-//    public delegate void OTVideoViewGetImageHandler (UIImage snapshot);
-
-//    [BaseType (typeof (UIView))]
-//    public partial interface OTVideoView {
-//
-//        [Export ("toolbarView", ArgumentSemantic.Retain)]
-//        UIView ToolbarView { get; }
-//
-//        [Export ("videoView")]
-//        UIView VideoView { get; }
-//
-//        [Export ("getImageWithBlock:")]
-//        void GetImageWithBlock (OTVideoViewGetImageHandler handler);
-//    }
 }
