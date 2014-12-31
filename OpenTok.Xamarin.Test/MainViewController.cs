@@ -31,6 +31,9 @@ namespace OpenTok.Xamarin.Test
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            // Hide top Nav bar
+            this.NavigationController.SetNavigationBarHidden (true, false);
         }
 
         public override void ViewDidAppear(bool animated)
@@ -61,7 +64,7 @@ namespace OpenTok.Xamarin.Test
          */
         private void DoPublish()
         {
-            _publisher = new OTPublisher(new PubDelegate(this), UIDevice.CurrentDevice.Name);
+            _publisher = new OTPublisher(new PublisherDelegate(this), UIDevice.CurrentDevice.Name);
 
             OTError error;
 
@@ -97,7 +100,7 @@ namespace OpenTok.Xamarin.Test
          */
         private void DoSubscribe(OTStream stream)
         {
-            _subscriber = new OTSubscriber(stream, new SubDelegate(this));
+            _subscriber = new OTSubscriber(stream, new SubscriberDelegate(this));
 
             OTError error;
 
@@ -132,37 +135,37 @@ namespace OpenTok.Xamarin.Test
 
             public override void DidConnect(OTSession session)
             {
-                Debug.WriteLine("Did Connect {0}", session.SessionId);
+                Debug.WriteLine("SessionDelegate:DidConnect: " + session.SessionId);
 
                 _this.DoPublish();
             }
 
             public override void DidFailWithError(OTSession session, OTError error)
             {
-                var msg = string.Format("There was an error connecting to session {0}", session.SessionId);
+                var msg = "SessionDelegate:DidFailWithError: " + session.SessionId;
 
-                Debug.WriteLine("SessionDidFail ({0})", msg);
+                Debug.WriteLine(msg);
 
                 _this.ShowAlert(msg);
             }
 
             public override void DidDisconnect(OTSession session)
             {
-                var msg = string.Format("Session disconnected: ({0})", session.SessionId);
+                var msg = "SessionDelegate:DidDisconnect: " + session.SessionId;
 
-                Debug.WriteLine("DidDisconnect ({0})", msg);
+                Debug.WriteLine(msg);
 
                 _this.ShowAlert(msg);
             }
 
             public override void ConnectionCreated(OTSession session, OTConnection connection)
             {
-                Debug.WriteLine("ConnectionCreated ({0})", connection.ConnectionId);
+                Debug.WriteLine("SessionDelegate:ConnectionCreated: " + connection.ConnectionId);
             }
 
             public override void ConnectionDestroyed(OTSession session, OTConnection connection)
             {
-                Debug.WriteLine("ConnectionDestroyed ({0})", connection.ConnectionId);
+                Debug.WriteLine("SessionDelegate:ConnectionDestroyed: " + connection.ConnectionId);
 
                 if (_this._subscriber.Stream.Connection.ConnectionId == connection.ConnectionId)
                 {
@@ -172,7 +175,7 @@ namespace OpenTok.Xamarin.Test
 
             public override void StreamCreated(OTSession session, OTStream stream)
             {
-                Debug.WriteLine("StreamCreated ({0})", stream.StreamId);
+                Debug.WriteLine("SessionDelegate:StreamCreated: " + stream.StreamId);
 
                 if(_this._subscriber == null && !_this._subscribeToSelf)
                 {
@@ -182,7 +185,7 @@ namespace OpenTok.Xamarin.Test
 
             public override void StreamDestroyed(OTSession session, OTStream stream)
             {
-                Debug.WriteLine("StreamDestroyed ({0})", stream.StreamId);
+                Debug.WriteLine("SessionDelegate:StreamDestroyed: " + stream.StreamId);
 
                 if (_this._subscriber.Stream.StreamId == stream.StreamId)
                 {
@@ -191,17 +194,19 @@ namespace OpenTok.Xamarin.Test
             }
         }
 
-        private class SubDelegate : OTSubscriberDelegate
+        private class SubscriberDelegate : OTSubscriberKitDelegate
         {
             private MainViewController _this;
 
-            public SubDelegate(MainViewController This)
+            public SubscriberDelegate(MainViewController This)
             {
                 _this = This;
             }
 
             public override void DidConnectToStream(OTSubscriber subscriber)
             {
+                Debug.WriteLine("SubscriberDelegate:DidConnectToStream: " + subscriber.Stream.StreamId);
+
                 _this._subscriber.View.Frame = new RectangleF(0, widgetHeight, widgetWidth, widgetHeight);
 
                 _this.View.AddSubview(_this._subscriber.View);
@@ -209,28 +214,30 @@ namespace OpenTok.Xamarin.Test
 
             public override void DidFailWithError(OTSubscriber subscriber, OTError error)
             {
-                Debug.WriteLine("Subscriber {0} DidFailWithError {1}", subscriber.Stream.StreamId, error);
+                var msg = String.Format("SubscriberDelegate:DidFailWithError: Stream {0}, Error: {1}", subscriber.Stream.StreamId, error.Description);
 
-                var msg = string.Format("There was an error subscribing to stream {0}", subscriber.Stream.StreamId);
+                Debug.WriteLine(msg);
 
                 _this.ShowAlert(msg);
             }
         }
 
-        private class PubDelegate : OTPublisherDelegate
+        private class PublisherDelegate : OTPublisherKitDelegate
         {
             private MainViewController _this;
 
-            public PubDelegate(MainViewController This)
+            public PublisherDelegate(MainViewController This)
             {
                 _this = This;
             }
 
             public override void DidFailWithError(OTPublisher publisher, OTError error)
             {
-                Debug.WriteLine("Publisher DidFail {0}", error);
+                var msg = String.Format("PublisherDelegate:DidFailWithError: Error: {0}", error.Description);
 
-                _this.ShowAlert("There was an error publishing");
+                Debug.WriteLine(msg);
+
+                _this.ShowAlert(msg);
 
                 _this.CleanupPublisher();
             }
@@ -238,6 +245,8 @@ namespace OpenTok.Xamarin.Test
 
             public override void StreamCreated(OTPublisher publisher, OTStream stream)
             {
+                Debug.WriteLine("PublisherDelegate:StreamCreated: " + stream.StreamId);
+
                 // If Subscribe To Self is true: Our own publisher is now visible to
                 // all participants in the OpenTok session. We will attempt to subscribe to
                 // our own stream. Expect to see a slight delay in the subscriber video and
@@ -249,6 +258,8 @@ namespace OpenTok.Xamarin.Test
             }
             public override void StreamDestroyed(OTPublisher publisher, OTStream stream)
             {
+                Debug.WriteLine("PublisherDelegate:StreamDestroyed: " + stream.StreamId);
+
                 if (_this._subscriber.Stream.StreamId == stream.StreamId)
                 {
                     _this.CleanupSubscriber();

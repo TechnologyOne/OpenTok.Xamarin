@@ -25,10 +25,8 @@ namespace OpenTok
 
     }
 
-    public interface IOTPublisherDelegate { }
-
     [Protocol, Model, BaseType (typeof (NSObject))]
-    public partial interface OTPublisherDelegate {
+    public partial interface OTPublisherKitDelegate {
 
         [Export ("publisher:didFailWithError:"), EventArgs ("OTPublisherDelegateError")]
         void DidFailWithError (OTPublisher publisher, OTError error);
@@ -43,17 +41,17 @@ namespace OpenTok
         void DidChangeCameraPosition (OTPublisher publisher, AVCaptureDevicePosition position);
     }
 
-    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTPublisherDelegate) })]
+    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTPublisherKitDelegate) })]
     public partial interface OTPublisher {
 
         [Export ("initWithDelegate:")]
-        IntPtr Constructor ([NullAllowed] IOTPublisherDelegate publisherDelegate);
+        IntPtr Constructor ([NullAllowed] OTPublisherKitDelegate publisherDelegate);
 
         [Export ("initWithDelegate:name:")]
-        IntPtr Constructor ([NullAllowed] IOTPublisherDelegate publisherDelegate, string name);
+        IntPtr Constructor ([NullAllowed] OTPublisherKitDelegate publisherDelegate, string name);
 
         [Export ("delegate", ArgumentSemantic.Assign)] [NullAllowed]
-        IOTPublisherDelegate Delegate { get; set; }
+        OTPublisherKitDelegate Delegate { get; set; }
 
         [Export ("session")]
         OTSession Session { get; }
@@ -73,8 +71,6 @@ namespace OpenTok
         [Export ("cameraPosition")]
         AVCaptureDevicePosition CameraPosition { get; set; }
     }
-
-    public interface IOTSessionDelegate { }
 
     [Protocol, Model, BaseType (typeof (NSObject))]
     public partial interface OTSessionDelegate {
@@ -120,10 +116,10 @@ namespace OpenTok
         OTConnection Connection { get; }
 
         [Export ("delegate", ArgumentSemantic.Assign)][NullAllowed]
-        IOTSessionDelegate Delegate { get; set; }
+        OTSessionDelegate Delegate { get; set; }
 
         [Export ("initWithApiKey:sessionId:delegate:")]
-        IntPtr Constructor (string apiKey, string sessionId, [NullAllowed] IOTSessionDelegate SessionDelegate);
+        IntPtr Constructor (string apiKey, string sessionId, [NullAllowed] OTSessionDelegate SessionDelegate);
 
         [Export ("connectWithToken:error:")]
         void ConnectWithToken (string token, out OTError error);
@@ -175,12 +171,10 @@ namespace OpenTok
         SizeF VideoDimensions { get; }
     }
 
-    public interface IOTSubscriberDelegate {  }
-
     [Protocol, Model, BaseType (typeof (NSObject))]
-    public partial interface OTSubscriberDelegate {
+    public partial interface OTSubscriberKitDelegate {
 
-        [Export ("subscriberDidConnectToStream:"), EventArgs ("OTSubscriberDelegateSubscriber")]
+        [Export ("subscriberDidConnectToStream:")]
         void DidConnectToStream (OTSubscriber subscriber);
 
         [Export ("subscriber:didFailWithError:"), EventArgs ("OTSubscriberDelegateError")]
@@ -196,7 +190,7 @@ namespace OpenTok
         void VideoDisabled (OTSubscriber subscriber);
     }
 
-    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSubscriberDelegate) })]
+    [BaseType (typeof (NSObject), Delegates=new string [] {"Delegate"}, Events=new Type [] { typeof (OTSubscriberKitDelegate) })]
     public partial interface OTSubscriber {
 
         [Export ("session")]
@@ -209,7 +203,7 @@ namespace OpenTok
         UIView View { get; }
 
         [Export ("delegate", ArgumentSemantic.Assign)][NullAllowed]
-        IOTSubscriberDelegate Delegate { get; set; }
+        OTSubscriberKitDelegate Delegate { get; set; }
 
         [Export ("subscribeToAudio")]
         bool SubscribeToAudio { get; set; }
@@ -218,7 +212,7 @@ namespace OpenTok
         bool SubscribeToVideo { get; set; }
 
         [Export ("initWithStream:delegate:")]
-        IntPtr Constructor (OTStream stream, [NullAllowed] IOTSubscriberDelegate subscriberDelegate);
+        IntPtr Constructor (OTStream stream, [NullAllowed] OTSubscriberKitDelegate subscriberDelegate);
 
         [Export ("close")]
         void Close ();
