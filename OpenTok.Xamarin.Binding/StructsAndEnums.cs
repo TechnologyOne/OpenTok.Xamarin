@@ -3,55 +3,55 @@
 namespace OpenTok
 {
     public enum OTSessionErrorCode  {
-        OTSessionSuccess = 0,
-        OTAuthorizationFailure = 1004,
-        OTErrorInvalidSession = 1005,
-        OTConnectionFailed = 1006,
-        OTNullOrInvalidParameter = 1011,
-        OTNotConnected = 1010,
-        OTSessionIllegalState = 1015,
-        OTNoMessagingServer = 1503,
-        OTConnectionRefused = 1023,
-        OTSessionStateFailed = 1020,
-        OTP2PSessionMaxParticipants = 1403,
-        OTSessionConnectionTimeout = 1021,
-        OTSessionInternalError = 2000,
-        OTSessionInvalidSignalType = 1461,
-        OTSessionSignalDataTooLong = 1413,
-        OTConnectionDropped = 1022,
-        OTSessionSubscriberNotFound = 1112,
-        OTSessionPublisherNotFound = 1113
+        Success = 0,
+        AuthorizationFailure = 1004,
+        ErrorInvalidSession = 1005,
+        ConnectionFailed = 1006,
+        NullOrInvalidParameter = 1011,
+        NotConnected = 1010,
+        IllegalState = 1015,
+        NoMessagingServer = 1503,
+        ConnectionRefused = 1023,
+        StateFailed = 1020,
+        P2PSessionMaxParticipants = 1403,
+        ConnectionTimeout = 1021,
+        InternalError = 2000,
+        InvalidSignalType = 1461,
+        SignalDataTooLong = 1413,
+        ConnectionDropped = 1022,
+        SubscriberNotFound = 1112,
+        PublisherNotFound = 1113
     }
 
     public enum OTPublisherErrorCode {
-        OTPublisherSuccess = 0,
-        OTSessionDisconnected = 1010,
-        OTPublisherInternalError = 2000,
-        OTPublisherWebRTCError = 1610
+        Success = 0,
+        SessionDisconnected = 1010,
+        InternalError = 2000,
+        WebRTCError = 1610
     }
 
     public enum OTSubscriberErrorCode {
-        OTSubscriberSuccess = 0,
-        OTConnectionTimedOut = 1542,
-        OTSubscriberSessionDisconnected = 1541,
-        OTSubscriberWebRTCError = 1600,
-        OTSubscriberServerCannotFindStream = 1604,
-        OTSubscriberInternalError = 2000
+        Success = 0,
+        ConnectionTimedOut = 1542,
+        SessionDisconnected = 1541,
+        WebRTCError = 1600,
+        ServerCannotFindStream = 1604,
+        InternalError = 2000
     }
 
     public enum OTSessionConnectionStatus {
-        OTSessionConnectionStatusNotConnected,
-        OTSessionConnectionStatusConnected,
-        OTSessionConnectionStatusConnecting,
-        OTSessionConnectionStatusDisconnecting,
-        OTSessionConnectionStatusFailed
+        NotConnected,
+        Connected,
+        Connecting,
+        Disconnecting,
+        Failed
     }
 
     public enum OTVideoOrientation {
-        OTVideoOrientationUp = 1,
-        OTVideoOrientationDown = 2,
-        OTVideoOrientationLeft = 3,
-        OTVideoOrientationRight = 4
+        Up = 1,
+        Down = 2,
+        Left = 3,
+        Right = 4
     }
 
     public enum OTPixelFormat {
@@ -66,8 +66,8 @@ namespace OpenTok
     }
 
     public enum OTSubscriberVideoEventReason {
-        OTSubscriberVideoEventPublisherPropertyChanged = 1,
-        OTSubscriberVideoEventSubscriberPropertyChanged = 2,
-        OTSubscriberVideoEventQualityChanged = 3
+        PublisherPropertyChanged = 1,
+        SubscriberPropertyChanged = 2,
+        QualityChanged = 3
     }
 }

@@ -34,14 +34,7 @@ namespace OpenTok.Xamarin.Test
 
             // Hide top Nav bar
             this.NavigationController.SetNavigationBarHidden (true, false);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            _session = new OTSession(_apiKey, _sessionId, new SessionDelegate(this));
-
+           
             DoConnect();
         }
 
@@ -49,11 +42,32 @@ namespace OpenTok.Xamarin.Test
         {
             OTError error;
 
+            _session = new OTSession(_apiKey, _sessionId, new SessionDelegate(this));
+
             _session.ConnectWithToken (_token, out error);
 
             if (error != null)
             {
                 this.ShowAlert(error.Description);
+            }
+        }
+
+        private void DoDisconnect()
+        {
+            this.CleanupSubscriber();
+
+            this.CleanupPublisher();
+
+            if (_session != null) {
+
+                if(_session.SessionConnectionStatus == OTSessionConnectionStatus.Connected){
+
+                    _session.Disconnect ();
+                }
+
+                _session.Delegate = null;
+                _session.Dispose();
+                _session = null;
             }
         }
 
@@ -86,10 +100,13 @@ namespace OpenTok.Xamarin.Test
          */
         private void CleanupPublisher()
         {
-            _publisher.View.RemoveFromSuperview();
-            _publisher = null;
-
-            // This is a good place to notify user that publishing has stopped
+            if (_publisher != null)
+            {
+                _publisher.View.RemoveFromSuperview();
+                _publisher.Delegate = null;
+                _publisher.Dispose();
+                _publisher = null;
+            }
         }
 
         /**
@@ -120,8 +137,13 @@ namespace OpenTok.Xamarin.Test
          */
         private void CleanupSubscriber()
         {
-            _subscriber.View.RemoveFromSuperview();
-            _subscriber = null;
+            if (_subscriber != null)
+            {
+                _subscriber.View.RemoveFromSuperview();
+                _subscriber.Delegate = null;
+                _subscriber.Dispose();
+                _subscriber = null;
+            }
         }
 
         private class SessionDelegate : OTSessionDelegate
@@ -167,10 +189,7 @@ namespace OpenTok.Xamarin.Test
             {
                 Debug.WriteLine("SessionDelegate:ConnectionDestroyed: " + connection.ConnectionId);
 
-                if (_this._subscriber.Stream.Connection.ConnectionId == connection.ConnectionId)
-                {
-                    _this.CleanupSubscriber();
-                }
+                _this.CleanupSubscriber();
             }
 
             public override void StreamCreated(OTSession session, OTStream stream)
@@ -187,10 +206,7 @@ namespace OpenTok.Xamarin.Test
             {
                 Debug.WriteLine("SessionDelegate:StreamDestroyed: " + stream.StreamId);
 
-                if (_this._subscriber.Stream.StreamId == stream.StreamId)
-                {
-                    _this.CleanupSubscriber();
-                }
+                _this.CleanupSubscriber();
             }
         }
 
@@ -260,10 +276,7 @@ namespace OpenTok.Xamarin.Test
             {
                 Debug.WriteLine("PublisherDelegate:StreamDestroyed: " + stream.StreamId);
 
-                if (_this._subscriber.Stream.StreamId == stream.StreamId)
-                {
-                    _this.CleanupSubscriber();
-                }
+                _this.CleanupSubscriber();
 
                 _this.CleanupPublisher();
             }
