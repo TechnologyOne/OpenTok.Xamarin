@@ -124,6 +124,11 @@
     <BundleResource Include="Resources\57pt_%401x.png" />
     <BundleResource Include="Resources\57pt_%402x.png" />
     <BundleResource Include="Resources\60pt_%402x.png" />
+    <BundleResource Include="Resources\320x480.png" />
+    <BundleResource Include="Resources\640x960.png" />
+    <BundleResource Include="Resources\640x1136.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
