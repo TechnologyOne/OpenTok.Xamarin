@@ -107,6 +107,13 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\hangup.png" />
+    <BundleResource Include="Resources\hangup%402x.png" />
+    <BundleResource Include="Resources\hangup%403x.png" />
+    <BundleResource Include="Resources\switch.png" />
+    <BundleResource Include="Resources\switch%402x.png" />
+    <BundleResource Include="Resources\switch%403x.png" />
+    <BundleResource Include="Resources\publisher.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -119,10 +126,15 @@
     <Compile Include="MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="VideoChatView.cs" />
+    <Compile Include="VideoChatView.designer.cs">
+      <DependentUpon>VideoChatView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <InterfaceDefinition Include="MainViewController.xib" />
+    <InterfaceDefinition Include="VideoChatView.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenTok.Xamarin.Binding\OpenTok.Xamarin.Binding.csproj">
