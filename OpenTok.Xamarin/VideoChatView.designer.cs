@@ -7,7 +7,7 @@
 using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 
-namespace OpenTok.Xamarin.Test
+namespace OpenTok.Xamarin.iOS
 {
 	partial class VideoChatView
 	{
@@ -16,6 +16,9 @@ namespace OpenTok.Xamarin.Test
 
 		[Outlet]
 		MonoTouch.UIKit.UIView PublisherView { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UILabel StatusLabel { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UIView SubscriberView { get; set; }
@@ -28,9 +31,9 @@ namespace OpenTok.Xamarin.Test
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (SubscriberView != null) {
-				SubscriberView.Dispose ();
-				SubscriberView = null;
+			if (HangupButton != null) {
+				HangupButton.Dispose ();
+				HangupButton = null;
 			}
 
 			if (PublisherView != null) {
@@ -38,9 +41,9 @@ namespace OpenTok.Xamarin.Test
 				PublisherView = null;
 			}
 
-			if (ToolBar != null) {
-				ToolBar.Dispose ();
-				ToolBar = null;
+			if (SubscriberView != null) {
+				SubscriberView.Dispose ();
+				SubscriberView = null;
 			}
 
 			if (SwitchButton != null) {
@@ -48,9 +51,14 @@ namespace OpenTok.Xamarin.Test
 				SwitchButton = null;
 			}
 
-			if (HangupButton != null) {
-				HangupButton.Dispose ();
-				HangupButton = null;
+			if (ToolBar != null) {
+				ToolBar.Dispose ();
+				ToolBar = null;
+			}
+
+			if (StatusLabel != null) {
+				StatusLabel.Dispose ();
+				StatusLabel = null;
 			}
 		}
 	}

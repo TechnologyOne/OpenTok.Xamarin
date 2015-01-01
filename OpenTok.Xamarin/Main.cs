@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace OpenTok.Xamarin.Test
+namespace OpenTok.Xamarin.iOS
 {
     public class Application
     {

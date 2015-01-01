@@ -5,7 +5,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using OpenTok;
 
-namespace OpenTok.Xamarin.Test
+namespace OpenTok.Xamarin.iOS
 {
     public partial class MainViewController : UIViewController
     {
@@ -42,9 +42,9 @@ namespace OpenTok.Xamarin.Test
             View.AddSubview (_videoChatView);
 
             // Subscribe to Events
-            _videoChatView.OnDidConnect += (sender, e) =>
+            _videoChatView.OnHangup += (sender, e) =>
                 {
-                    Debug.WriteLine("****************** OnDidConnect!");
+                    Debug.WriteLine("OnHangup: User tapped the hangup button.");
                 };
 
             _videoChatView.OnError += (sender, e) =>

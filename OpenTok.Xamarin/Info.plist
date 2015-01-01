@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>OpenTok.Xamarin.Test</string>
+	<string>OpenTok</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.us.techone.OpenTok.Xamarin.Test</string>
+	<string>com.us.techone.OpenTok.Xamarin</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -26,5 +26,13 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>57pt_@1x</string>
+		<string>57pt_@2x</string>
+		<string>60pt_@2x</string>
+	</array>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
 </dict>
 </plist>

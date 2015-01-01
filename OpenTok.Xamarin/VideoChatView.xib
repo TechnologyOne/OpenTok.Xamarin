@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="HangupButton" destination="Dw4-7j-fuu" id="xKd-6c-MjP"/>
                 <outlet property="PublisherView" destination="myK-ym-Uil" id="DWY-wu-mZJ"/>
+                <outlet property="StatusLabel" destination="hT2-uu-GF1" id="xPK-kJ-JtA"/>
                 <outlet property="SubscriberView" destination="mAQ-FD-sf7" id="O9F-s5-N5R"/>
                 <outlet property="SwitchButton" destination="2MS-QO-181" id="yg4-aM-5In"/>
                 <outlet property="ToolBar" destination="s1h-Ao-YYq" id="o8l-3t-eCr"/>
@@ -43,6 +44,12 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Connecting..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT2-uu-GF1">
+                    <rect key="frame" x="8" y="273" width="304" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
         </view>

@@ -7,7 +7,7 @@ using System.Drawing;
 using OpenTok;
 using MonoTouch.AVFoundation;
 
-namespace OpenTok.Xamarin.Test
+namespace OpenTok.Xamarin.iOS
 {
     [Register("VideoChatView")]
     public partial class VideoChatView : UIView
@@ -21,7 +21,7 @@ namespace OpenTok.Xamarin.Test
         string _token;
         bool _subscribeToSelf = false;
 
-        public EventHandler OnDidConnect;
+        public EventHandler OnHangup;
         public EventHandler<OnErrorEventArgs> OnError;
 
         public string ApiKey
@@ -62,6 +62,9 @@ namespace OpenTok.Xamarin.Test
             // Add the Button Handlers
             this.HangupButton.Clicked += HangupButtonHandler;
             this.SwitchButton.Clicked += SwitchButtonHandler;
+
+            // Initialize Status
+            this.StatusLabel.Text = String.Empty;
         }
 
         private void HangupButtonHandler (object sender, EventArgs e)
@@ -70,12 +73,15 @@ namespace OpenTok.Xamarin.Test
             {
                 this.DoConnect();
 
+                this.HangupButton.TintColor = UIColor.Red;
             }
             else
             {
                 this.DoDisconnect();
 
                 this.HangupButton.TintColor = UIColor.Green;
+
+                this.OnHangup(this, null);
             }
         }
 
@@ -104,6 +110,8 @@ namespace OpenTok.Xamarin.Test
         {
             OTError error;
 
+            this.StatusLabel.Text = "Connecting...";
+
             _session = new OTSession(_apiKey, _sessionId, new SessionDelegate(this));
 
             _session.ConnectWithToken (_token, out error);
@@ -116,6 +124,8 @@ namespace OpenTok.Xamarin.Test
 
         private void DoDisconnect()
         {
+            this.StatusLabel.Text = String.Empty;
+
             this.CleanupSubscriber();
 
             this.CleanupPublisher();
@@ -224,8 +234,6 @@ namespace OpenTok.Xamarin.Test
             {
                 Debug.WriteLine("SessionDelegate:DidConnect: " + session.SessionId);
 
-                _this.OnDidConnect(this, null);
-
                 _this.DoPublish();
             }
 
@@ -291,6 +299,8 @@ namespace OpenTok.Xamarin.Test
                 _this._subscriber.View.Frame = new RectangleF(0, 0, _this.Frame.Width, _this.Frame.Height);
 
                 _this.SubscriberView.AddSubview(_this._subscriber.View);
+
+                _this.StatusLabel.Text = String.Empty;
             }
 
             public override void DidFailWithError(OTSubscriber subscriber, OTError error)

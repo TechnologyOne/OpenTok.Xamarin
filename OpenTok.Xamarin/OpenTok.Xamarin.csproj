@@ -6,9 +6,8 @@
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{9CF1C29B-5691-448B-89C8-19F1CC619B3F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OpenTok.Xamarin.Test</RootNamespace>
+    <RootNamespace>OpenTok.Xamarin.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>OpenTokXamarinTest</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,6 +26,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
+    <AssemblyName>OpenTokXamarinTest</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -42,6 +42,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
+    <AssemblyName>OpenTokXamarinTest</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +61,9 @@
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
+    <IpaPackageName>
+    </IpaPackageName>
+    <AssemblyName>OpenTokXamarin</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -75,6 +79,7 @@
     <MtouchArch>ARMv7</MtouchArch>
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
     <MtouchLink>Full</MtouchLink>
+    <AssemblyName>OpenTokXamarinIOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -87,6 +92,7 @@
     <BuildIpa>true</BuildIpa>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <AssemblyName>OpenTokXamarinIOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
@@ -98,6 +104,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <ConsolePause>false</ConsolePause>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <AssemblyName>OpenTokXamarinIOS</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -114,6 +121,9 @@
     <BundleResource Include="Resources\switch%402x.png" />
     <BundleResource Include="Resources\switch%403x.png" />
     <BundleResource Include="Resources\publisher.png" />
+    <BundleResource Include="Resources\57pt_%401x.png" />
+    <BundleResource Include="Resources\57pt_%402x.png" />
+    <BundleResource Include="Resources\60pt_%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

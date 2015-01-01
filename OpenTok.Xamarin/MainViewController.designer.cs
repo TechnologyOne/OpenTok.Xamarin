@@ -6,7 +6,7 @@
 //
 using MonoTouch.Foundation;
 
-namespace OpenTok.Xamarin.Test
+namespace OpenTok.Xamarin.iOS
 {
     [Register("MainViewController")]
     partial class MainViewController
