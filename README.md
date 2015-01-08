@@ -19,3 +19,4 @@ Known Issues
 - Intermitant crash when hanging up in the middle of connecting to the session.  Working with TokBox on resolving this issue.
 
 
+Icons in the Demo app obtained from http://icons8.com.  Please comply with their free / paid licensing if using in your application.
